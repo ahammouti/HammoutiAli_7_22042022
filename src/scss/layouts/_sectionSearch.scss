@@ -1,0 +1,51 @@
+.container {
+    .search {
+        &__searchBar {
+            @include flex-center;
+            margin: 0 auto;
+            position: relative;
+
+            input {
+                width: 100%;
+                padding: 15px 10px;
+                border: none;
+                border-radius: 5px;
+                @include box-shw;
+                background-color: $bg-card-and-search-bar;
+            }
+
+            .search-icon {
+                position: absolute;
+                right: 0;
+                background: $bg-card-and-search-bar;
+                width: 35px;
+                margin-right: 5px;
+                padding-left: 10px;
+            }
+        }
+
+        &__searchTags {
+            padding-top: $space-between-section;
+
+            .tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+
+                &__itemTag {
+                    @include flex-center;
+                    width: fit-content;
+                    padding: 5px 15px;
+                    background: $color-blue;
+                    color: #f1f1f1;
+                    border-radius: 5px;
+
+                    button {
+                        @include flex-center;
+                        margin-left: 20px;
+                    }
+                }
+            }
+        }
+    }
+}

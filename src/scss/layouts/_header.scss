@@ -1,0 +1,14 @@
+.container {
+    .header {
+        padding-top: 15px;
+        padding-bottom: $space-between-section;
+        @include flex-center;
+
+        &__logo {
+            text-align: center;
+            color: $color-danger;
+            font-weight: bold;
+            font-size: 12px;
+        }
+    }
+}
