@@ -28,6 +28,7 @@
             padding-top: $space-between-section;
 
             .tags {
+                display: none;
                 display: flex;
                 flex-wrap: wrap;
                 gap: 20px;
@@ -40,10 +41,59 @@
                     color: #f1f1f1;
                     border-radius: 5px;
 
+                    p {
+                        margin-bottom: 2px;
+                    }
+
                     button {
                         @include flex-center;
                         margin-left: 20px;
                     }
+                }
+
+                padding-bottom: $space-between-section - 10;
+            }
+
+            .searchByTagButtons {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: start;
+
+                &__button {
+                    text-align: left;
+                    padding: 20px;
+                    width: 25vw;
+                    min-width: 137px;
+                    max-width: 200px;
+                    border-radius: 5px;
+                    font-family: Lato;
+                    font-size: 16px;
+                    color: #f1f1f1;
+                    display: flex;
+                    position: relative;
+
+                    p {
+                        text-align-last: left;
+                    }
+
+                    img {
+                        position: absolute;
+                        right: 15px;
+                        top: 42%;
+                    }
+                }
+
+                &__button--ingredients {
+                    background: $color-blue;
+                }
+
+                &__button--appliances {
+                    background: $color-success;
+                }
+
+                &__button--utensils {
+                    background: $color-danger;
                 }
             }
         }

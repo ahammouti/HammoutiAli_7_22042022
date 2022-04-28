@@ -19,11 +19,12 @@
         </header>
         <section class="search">
             <section class="search__searchBar">
-                <input type="text" placeholder="Rechercher une recette">
-                <img class="search-icon" src="./src/images/icons/search-icon.svg" alt="">
+                <input type="text" placeholder="Rechercher une recette" class="js-inputSearchbar">
+                <img class="search-icon" src="./src/images/icons/search-icon.svg" alt="rechercher">
             </section>
             <section class="search__searchTags">
                 <div class="tags">
+                    <!-- !section dynamique a faire en javascript injecter dans la div tags -->
                     <div class="tags__itemTag">
                         <p class="text-tag">Lait de coco</p>
                         <button>
@@ -43,11 +44,25 @@
                         </button>
                     </div>
                 </div>
-
+                <div class="searchByTagButtons">
+                    <button
+                        class="searchByTagButtons__button searchByTagButtons__button--ingredients js-btnIngredients">
+                        <p>Ingrédients</p>
+                        <img src="./src/images/icons/arrow-down.svg" alt="dérouler liste">
+                    </button>
+                    <button class="searchByTagButtons__button searchByTagButtons__button--appliances js-btnAppliances">
+                        <p>Appareils</p>
+                        <img src="./src/images/icons/arrow-down.svg" alt="dérouler liste">
+                    </button>
+                    <button class="searchByTagButtons__button searchByTagButtons__button--utensils js-btnUtensils">
+                        <p>Ustensiles</p>
+                        <img src="./src/images/icons/arrow-down.svg" alt="dérouler liste">
+                    </button>
+                </div>
             </section>
         </section>
     </div>
-    <script src="./src/js/index.js"></script>
+    <script type="module" src="./src/js/index.js"></script>
 </body>
 
 </html>
