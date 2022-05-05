@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <header class="header">
-            <a href="/" class="header__logo">
+            <a href="#" class="header__logo">
                 <img src="./src/images/logo/logo.svg" alt="logo les petits plats">
                 <h1>Les petits plats</h1>
             </a>
@@ -25,13 +25,10 @@
             <section class="search__searchTags">
                 <div class="tags">
                     <!-- !section dynamique a faire en javascript injecter dans la div tags -->
-                    <div class="tags__itemTag">
-                        <p class="text-tag">Lait de coco</p>
-                        <button>
-                            <img src="./src/images/icons/close-icon.svg" alt="supprimer">
-                        </button>
+                    <div class="tags__itemTag js-containerTag">
+
                     </div>
-                    <div class="tags__itemTag">
+                    <!-- <div class="tags__itemTag">
                         <p class="text-tag">coco</p>
                         <button>
                             <img src="./src/images/icons/close-icon.svg" alt="supprimer">
@@ -42,23 +39,37 @@
                         <button>
                             <img src="./src/images/icons/close-icon.svg" alt="supprimer">
                         </button>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="searchByTagButtons">
-                    <button
-                        class="searchByTagButtons__button searchByTagButtons__button--ingredients js-btnIngredients">
-                        <p>Ingrédients</p>
-                        <img src="./src/images/icons/arrow-down.svg" alt="dérouler liste">
-                    </button>
-                    <button class="searchByTagButtons__button searchByTagButtons__button--appliances js-btnAppliances">
-                        <p>Appareils</p>
-                        <img src="./src/images/icons/arrow-down.svg" alt="dérouler liste">
-                    </button>
-                    <button class="searchByTagButtons__button searchByTagButtons__button--utensils js-btnUtensils">
-                        <p>Ustensiles</p>
-                        <img src="./src/images/icons/arrow-down.svg" alt="dérouler liste">
-                    </button>
-                </div>
+                    <div class="searchByTagButtons__button searchByTagButtons__button--ingredients js-btnIngredients ">
+                        <div class="container-contentBtn">
+                            <div class="headerTagBtn">
+                                <p>Ingrédients</p>
+                                <img src="./src/images/icons/arrow-down.svg" alt="dérouler liste">
+                            </div>
+                            <div class="listTagBtn -ingredients"></div>
+                        </div>
+                    </div>
+                    <div class="searchByTagButtons__button searchByTagButtons__button--appliances js-btnAppliances ">
+                        <div class="container-contentBtn">
+
+                            <div class="headerTagBtn">
+                                <p>Appareils</p>
+                                <img src="./src/images/icons/arrow-down.svg" alt="dérouler liste">
+                            </div>
+                            <div class="listTagBtn -appliances "></div>
+                        </div>
+                    </div>
+                    <div class="searchByTagButtons__button searchByTagButtons__button--utensils js-btnUtensils ">
+                        <div class="container-contentBtn">
+                            <div class="headerTagBtn">
+                                <p>Ustensiles</p>
+                                <img src="./src/images/icons/arrow-down.svg" alt="dérouler liste">
+                            </div>
+                            <div class="listTagBtn -utensils hidden"></div>
+                        </div>
+                    </div>
             </section>
         </section>
     </div>

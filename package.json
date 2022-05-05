@@ -12,5 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "node-sass": "^7.0.1"
+  },
+  "dependencies": {
+    "sass": "^1.51.0"
   }
 }

@@ -61,10 +61,11 @@
                 justify-content: start;
 
                 &__button {
+                    cursor: pointer;
                     text-align: left;
-                    padding: 20px;
                     width: 25vw;
-                    min-width: 137px;
+                    height: 100%;
+                    min-width: 150px;
                     max-width: 200px;
                     border-radius: 5px;
                     font-family: Lato;
@@ -73,16 +74,41 @@
                     display: flex;
                     position: relative;
 
-                    p {
-                        text-align-last: left;
-                    }
+                    .container-contentBtn {
+                        padding: 20px;
+                        display: flex;
+                        width: 100%;
+                        flex-direction: column;
 
-                    img {
-                        position: absolute;
-                        right: 15px;
-                        top: 42%;
+                        .headerTagBtn {
+                            padding: 5px;
+                            position: relative;
+
+                            p {
+                                text-align-last: left;
+                            }
+
+                            img {
+                                position: absolute;
+                                right: 0px;
+                                top: 42%;
+                            }
+                        }
+
+                        .listTagBtn {
+                            display: none;
+                            background: #000;
+                        }
                     }
                 }
+
+                // &__button {
+                //     .container-contentBtn {
+                //         .listTagBtn {
+                //             display: block;
+                //         }
+                //     }
+                // }
 
                 &__button--ingredients {
                     background: $color-blue;
@@ -95,6 +121,8 @@
                 &__button--utensils {
                     background: $color-danger;
                 }
+
+
             }
         }
     }

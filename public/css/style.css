@@ -104,9 +104,9 @@ h1 {
   padding: 15px 10px;
   border: none;
   border-radius: 5px;
-  box-shadow: 2px 5px 11px -4px #e1e1e1;
-  -webkit-box-shadow: 2px 5px 11px -4px #f3f3f3;
-  -moz-box-shadow: 2px 5px 11px -4px #a5a2a2;
+  box-shadow: 2px 5px 11px -4px rgb(225, 225, 225);
+  -webkit-box-shadow: 2px 5px 11px -4px rgb(243, 243, 243);
+  -moz-box-shadow: 2px 5px 11px -4px rgb(165, 162, 162);
   background-color: #E7E7E7;
 }
 .container .search__searchBar .search-icon {
@@ -153,10 +153,11 @@ h1 {
   justify-content: start;
 }
 .container .search__searchTags .searchByTagButtons__button {
+  cursor: pointer;
   text-align: left;
-  padding: 20px;
   width: 25vw;
-  min-width: 137px;
+  height: 100%;
+  min-width: 150px;
   max-width: 200px;
   border-radius: 5px;
   font-family: Lato;
@@ -165,13 +166,27 @@ h1 {
   display: flex;
   position: relative;
 }
-.container .search__searchTags .searchByTagButtons__button p {
+.container .search__searchTags .searchByTagButtons__button .container-contentBtn {
+  padding: 20px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.container .search__searchTags .searchByTagButtons__button .container-contentBtn .headerTagBtn {
+  padding: 5px;
+  position: relative;
+}
+.container .search__searchTags .searchByTagButtons__button .container-contentBtn .headerTagBtn p {
   text-align-last: left;
 }
-.container .search__searchTags .searchByTagButtons__button img {
+.container .search__searchTags .searchByTagButtons__button .container-contentBtn .headerTagBtn img {
   position: absolute;
-  right: 15px;
+  right: 0px;
   top: 42%;
+}
+.container .search__searchTags .searchByTagButtons__button .container-contentBtn .listTagBtn {
+  display: none;
+  background: #000;
 }
 .container .search__searchTags .searchByTagButtons__button--ingredients {
   background: #3282F7;

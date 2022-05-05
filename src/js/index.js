@@ -1,7 +1,12 @@
 import Search from "./classes/Search.js";
+import Tag from "./classes/Tag.js";
+
+let search = "";
+let tag = "";
 
 function init() {
-    new Search();
+    search = new Search();
+    tag = new Tag();
 }
 
 init();
