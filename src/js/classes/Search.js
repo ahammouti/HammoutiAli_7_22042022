@@ -1,3 +1,4 @@
+import Recipes from "./Recipes.js";
 export default class Search {
     constructor() {
         this.arrayAllDataRecipes = [];
@@ -5,9 +6,14 @@ export default class Search {
         this.arrayAppliances = [];
         this.arrayUtensils = [];
 
+        this.searchInput = document.getElementsByClassName("js-inputSearchbar")[0];
         this.textTag = document.getElementsByClassName("js-textTag")[0];
         this.itemTag = document.getElementsByClassName("js-itemTag")[0];
-        this.btnIngredient = document.getElementsByClassName("js-btnIngredients")[0];
+        this.searchByTagBtnDiv = document.getElementsByClassName("js-btnFilter");
+        this.headerTagBtnDiv = document.getElementsByClassName("headerTagBtn");
+        this.arrowListImg = document.getElementsByClassName("js-arrowList");
+        this.menuOpened = true;
+
 
         this.arrButtons = ["appliance", "ingredients", "utensils"];
         this.arrayButonsFiltered = [];
@@ -16,19 +22,17 @@ export default class Search {
         this.attachEvent();
     }
 
-
     bindEvent() {
-        console.log(this.btnIngredient);
         this.openFilterList = (e) => this._openFilterList(e);
-    }
-    attachEvent() {
-        if (this.btnIngredient) {
-            this.btnIngredient.addEventListener("click", this.openFilterList)
-        }
+        this.closeFilterList = (e) => this._closeFilterList(e);
     }
 
-    _openFilterList(e) {
-        console.log(e);
+    handleDropDown = () => {
+    }
+
+    attachEvent() {
+        for (const btn of this.searchByTagBtnDiv) { this.searchByTagBtnDiv ? btn.addEventListener("click", this.openFilterList) : "" }
+        this.searchInput.addEventListener("input",)
     }
 
     async _getDataRecipes() {
@@ -41,6 +45,7 @@ export default class Search {
             this.getIngredients(this.arrayAllDataRecipes);
             this.getAppliances();
             this.getUtensils();
+            this.recipes = new Recipes(this.arrayAllDataRecipes);
         }
     }
 
@@ -48,15 +53,11 @@ export default class Search {
         let item = [];
         array.forEach((element) => {
             element.ingredients.forEach((ingredient) => {
-                if (
-                    !item.includes(ingredient.ingredient.toLowerCase().replace(".", ""))
-                ) {
-                    item.push(ingredient.ingredient.toLowerCase().replace(".", ""));
-                }
+                !item.includes(ingredient.ingredient.toLowerCase().replace(".", "")) ?
+                    item.push(ingredient.ingredient.toLowerCase().replace(".", "")) : "";
             });
         });
         item.sort();
-
         this.displayFilter(item, "ingredients");
     }
 
@@ -67,6 +68,7 @@ export default class Search {
         });
         arrayButtons.splice(0, arrayButtons.length);
     }
+
     getAppliances() {
         this.filterArrayOfButtonsTags(this.arrayAppliances, this.arrButtons[0]);
         this.arrayAppliances.push(this.arrayButonsFiltered);
@@ -76,9 +78,7 @@ export default class Search {
     getUtensils() {
         this.arrayAllDataRecipes.forEach(data => {
             this.arrayButonsFiltered = [...new Set(this.arrayUtensils)];
-            data.ustensils.forEach(ust => {
-                this.arrayUtensils.push(ust);
-            });
+            data.ustensils.forEach(ust => this.arrayUtensils.push(ust));
         });
         this.arrayUtensils.push(this.arrayButonsFiltered);
         this.arrayUtensils.splice(0, this.arrayUtensils.length - 1);
@@ -86,15 +86,15 @@ export default class Search {
     }
 
     displayFilter(tabl, type) {
-        console.log(`tab ${type} :`, tabl);
-        const containerFilter = document.getElementsByClassName("listTagBtn -" + type)[0];
-        console.log(containerFilter);
+        this.containerFilter = document.getElementsByClassName("listTagBtn -" + type)[0];
         tabl.map(element => {
-            const filterItem = document.createElement("div");
+            const filterItem = document.createElement("li");
             filterItem.classList.add("js-filterItem");
+            filterItem.setAttribute("tabindex", "0")
             filterItem.textContent = element;
-            containerFilter.appendChild(filterItem);
+            this.containerFilter.appendChild(filterItem);
         });
+
         // const tag = document.createElement("div");
         // tag.classList.add("tag");
 
@@ -117,7 +117,36 @@ export default class Search {
         // })
         // console.log(tag);
         // return containerTags.appendChild(tag);
-
     };
 
+    _openFilterList(e) {
+        const bigBtnList = e.currentTarget;
+        const itemTag = bigBtnList.children[0].children[1];
+        const arrowImg = e.currentTarget.children[0].children[0].children[2];
+        const isOpened = e.currentTarget.dataset.openedlist;
+        const isclickedArrow = e.currentTarget.children[0].children[0].children[2].dataset.isclicked;
+
+        const bigBtnClass = bigBtnList.getAttribute("class", "showListTag");
+
+        if (isOpened == "false") {
+            e.currentTarget.setAttribute("data-openedList", true);
+            bigBtnList.classList.add("showListTag");
+            itemTag.classList.add("showListTag");
+
+            if (this.arrowListImg) {
+                for (const closeBtn of this.arrowListImg) {
+                    closeBtn.addEventListener("click", () => {
+                        arrowImg.setAttribute("data-isclicked", true)
+                    });
+                }
+            }
+            arrowImg.setAttribute("data-isclicked", false)
+        }
+
+        else if (isOpened == "true" && isclickedArrow == "true") {
+            e.currentTarget.setAttribute("data-openedList", false);
+            bigBtnList.classList.remove("showListTag");
+            itemTag.classList.remove("showListTag");
+        }
+    }
 }

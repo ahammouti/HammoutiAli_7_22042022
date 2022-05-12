@@ -1,12 +1,11 @@
+import Recipes from "./classes/Recipes.js";
 import Search from "./classes/Search.js";
 import Tag from "./classes/Tag.js";
-
-let search = "";
-let tag = "";
-
-function init() {
-    search = new Search();
-    tag = new Tag();
+export default class App {
+    constructor() {
+        this.search = new Search();
+        this.tag = new Tag();
+    }
 }
 
-init();
+export const init = new App();

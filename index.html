@@ -42,35 +42,39 @@
                     </div> -->
                 </div>
                 <div class="searchByTagButtons">
-                    <div class="searchByTagButtons__button searchByTagButtons__button--ingredients js-btnIngredients ">
+                    <div data-openedlist=false tabindex="0" class="searchByTagButtons__button searchByTagButtons__button--ingredients js-btnFilter">
                         <div class="container-contentBtn">
                             <div class="headerTagBtn">
-                                <p>Ingrédients</p>
-                                <img src="./src/images/icons/arrow-down.svg" alt="dérouler liste">
+                                <input tabindex="0" type="text" placeholder="Rechercher un ingrédient" class="inputSearch js-input">
+                                <p class="headerTagBtn-title">Ingrédients</p>
+                                <img data-isclicked="false" class="js-arrowList" src="./src/images/icons/arrow-down.svg" alt="dérouler liste">
                             </div>
                             <div class="listTagBtn -ingredients"></div>
                         </div>
                     </div>
-                    <div class="searchByTagButtons__button searchByTagButtons__button--appliances js-btnAppliances ">
+                    <div data-openedlist=false tabindex="0" class="searchByTagButtons__button searchByTagButtons__button--appliances js-btnFilter">
                         <div class="container-contentBtn">
-
                             <div class="headerTagBtn">
-                                <p>Appareils</p>
-                                <img src="./src/images/icons/arrow-down.svg" alt="dérouler liste">
+                                <input type="search" placeholder="Rechercher un appareil" class="inputSearch js-input">
+                                <p class="headerTagBtn-title">Appareils</p>
+                                <img class="js-arrowList" src="./src/images/icons/arrow-down.svg" alt="dérouler liste">
                             </div>
-                            <div class="listTagBtn -appliances "></div>
+                            <div class="listTagBtn -appliances"></div>
                         </div>
                     </div>
-                    <div class="searchByTagButtons__button searchByTagButtons__button--utensils js-btnUtensils ">
+                    <div data-openedlist=false tabindex="0" class="searchByTagButtons__button searchByTagButtons__button--utensils js-btnFilter">
                         <div class="container-contentBtn">
                             <div class="headerTagBtn">
-                                <p>Ustensiles</p>
-                                <img src="./src/images/icons/arrow-down.svg" alt="dérouler liste">
+                                <input type="text" placeholder="Rechercher un ustensile" class="inputSearch js-input">
+                                <p class="headerTagBtn-title">Ustensiles</p>
+                                <img class="js-arrowList" src="./src/images/icons/arrow-down.svg" alt="dérouler liste">
                             </div>
-                            <div class="listTagBtn -utensils hidden"></div>
+                            <div class="listTagBtn -utensils"></div>
                         </div>
                     </div>
             </section>
+        </section>
+        <section class="galleryRecipes js-galleryRecipes">
         </section>
     </div>
     <script type="module" src="./src/js/index.js"></script>

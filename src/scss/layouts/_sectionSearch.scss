@@ -1,13 +1,17 @@
 .container {
     .search {
+        padding-bottom: $space-between-section + 15;
+
         &__searchBar {
             @include flex-center;
             margin: 0 auto;
             position: relative;
 
             input {
+                height: 60px;
                 width: 100%;
                 padding: 15px 10px;
+                font-size: 18px;
                 border: none;
                 border-radius: 5px;
                 @include box-shw;
@@ -26,6 +30,7 @@
 
         &__searchTags {
             padding-top: $space-between-section;
+            position: relative;
 
             .tags {
                 display: none;
@@ -59,26 +64,41 @@
                 flex-wrap: wrap;
                 gap: 15px;
                 justify-content: start;
+                // position: absolute;
+
+
+                &__button--ingredients {
+                    background: $color-blue;
+                }
+
+                &__button--appliances {
+                    background: $color-success;
+                }
+
+                &__button--utensils {
+                    background: $color-danger;
+                }
 
                 &__button {
                     cursor: pointer;
                     text-align: left;
-                    width: 25vw;
                     height: 100%;
                     min-width: 150px;
-                    max-width: 200px;
+                    max-height: 400px;
                     border-radius: 5px;
                     font-family: Lato;
                     font-size: 16px;
                     color: #f1f1f1;
                     display: flex;
-                    position: relative;
+                    // position: relative;
 
                     .container-contentBtn {
+                        margin-top: 10px;
                         padding: 20px;
                         display: flex;
                         width: 100%;
                         flex-direction: column;
+                        position: relative;
 
                         .headerTagBtn {
                             padding: 5px;
@@ -93,12 +113,140 @@
                                 right: 0px;
                                 top: 42%;
                             }
+
+                            .inputSearch {
+                                display: none;
+                                background: transparent;
+                                border: none;
+                                padding: 5px;
+                                width: 90%;
+                                height: 100%;
+                                color: #f1f1f1;
+                                font-size: 18px;
+                            }
+
+                            .inputSearch::placeholder {
+                                color: #f1f1f1c3;
+                                font-weight: bold;
+                                font-size: 18px;
+                            }
+
+
+                            .arrowList {
+                                transform: rotate(180deg);
+                                cursor: pointer;
+                            }
                         }
 
                         .listTagBtn {
                             display: none;
-                            background: #000;
+                            position: absolute;
+                            overflow: hidden;
+                            grid-template-columns: repeat(1, 1fr);
+                            gap: 15px 25px;
+                            top: 60px;
+                            left: 0;
+                            max-height: 49vh;
+                            width: 100%;
+                            padding: 25px;
+                            border-radius: 5px 5px 5px 5px;
+                            z-index: 10;
+
+                            .js-filterItem {
+                                cursor: pointer;
+                                width: fit-content;
+
+                                &:hover {
+                                    transform: scale(1.1);
+                                    transition: scale 1s ease-in-out;
+                                }
+                            }
+
+                            &:hover {
+                                overflow: auto;
+                            }
+
+                            &.-ingredients {
+                                background-color: $color-blue;
+                            }
+
+                            &.-appliances {
+                                display: none;
+                                background-color: $color-success;
+                            }
+
+                            &.-utensils {
+                                display: none;
+                                background-color: $color-danger;
+                            }
+
+
+                            @media screen and (min-width: 700px) {
+                                grid-template-columns: repeat(2, 1fr);
+                            }
+
+                            @media screen and (min-width: 1072px) {
+                                grid-template-columns: repeat(3, 1fr);
+                            }
                         }
+
+                        .listTagBtn.showListTag {
+                            display: grid;
+                        }
+
+                        .listTagBtn.hidden {
+                            display: none;
+                        }
+                    }
+                }
+
+                .hide {
+                    display: none !important;
+                }
+
+                &__button.showListTag {
+                    min-width: none;
+                    cursor: unset;
+                    max-width: 650px;
+                    width: 100%;
+
+                    .headerTagBtn-title {
+                        display: none;
+                    }
+
+                    .inputSearch {
+                        display: block !important;
+                        margin-right: 5px !important;
+                        padding-right: 10px !important;
+                    }
+
+                    .inputSearch::placeholder {
+                        overflow: hidden;
+                        text-overflow: ellipsis !important;
+                    }
+
+                    .js-arrowList {
+                        cursor: pointer;
+                        margin-top: -10px;
+                        padding: 10px;
+                        transform: rotate(180deg);
+                    }
+                }
+
+                &__button.hidden {
+                    width: unset;
+                    max-width: 150px !important;
+
+                    .inputSearch {
+                        display: none !important;
+                    }
+
+                    .headerTagBtn-title {
+                        display: block;
+                    }
+
+                    .js-arrowList {
+                        all: unset;
                     }
                 }
 
@@ -109,20 +257,6 @@
                 //         }
                 //     }
                 // }
-
-                &__button--ingredients {
-                    background: $color-blue;
-                }
-
-                &__button--appliances {
-                    background: $color-success;
-                }
-
-                &__button--utensils {
-                    background: $color-danger;
-                }
-
-
             }
         }
     }

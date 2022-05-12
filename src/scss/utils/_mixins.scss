@@ -9,3 +9,23 @@
     -webkit-box-shadow: 2px 5px 11px -4px rgb(243, 243, 243);
     -moz-box-shadow: 2px 5px 11px -4px rgb(165, 162, 162);
 }
+
+@mixin ellipsis {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+}
+
+@mixin ellipsis-none {
+    text-overflow: unset;
+    display: unset;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: unset;
+    display: unset;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: unset;
+}
