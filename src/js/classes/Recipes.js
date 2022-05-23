@@ -1,39 +1,21 @@
 export default class Recipes {
+
     constructor(recipes) {
-        this.displayRecipes(recipes)
-        // this.createListIngredients(recipes)
-        this.list = [];
+
+        this.galleryRecipes = document.getElementsByClassName("js-galleryRecipes")[0];
+        // this.bindEvent();
+        // this.displayRecipes(recipes);
+        // this.attachEvent();
     }
 
-    createListIngredients(list) {
-        list.forEach(element => {
-            // console.log(element.ingredients);
-            element.ingredients.forEach(ingr => {
-                const wrapListIngredient = document.getElementsByClassName("js-wrapListIngredient")[0];
-
-                let li = document.createElement("li");
-                li.innerHTML = ` 
-                        <div>${ingr.ingredient} :  <span>${ingr.quantity ? ingr.quantity : ""} ${ingr.unit ? ingr.unit : ""}</span> </div>
-                `;
-                wrapListIngredient.appendChild(li);
-            });
-        });
+    bindEvent() {
     }
-    // createListIngredients(list) {
-    //     const wrapListIngredient = document.getElementsByClassName("js-wrapListIngredient")[0];
-    //     list.map(ingr => {
-    //         console.log(ingr);
-    //         const li = document.createElement('li');
-    //         li.innerHTML = `<div>${ingr.ingredients.ingredient} : <span>${ingr.ingredients.quantity ? ingr.quantity : ""} ${ingr.unit ? ingr.unit : ""}</span> </div>`
 
-    //         wrapListIngredient.appendChild(li)
-    //     });
-
-    // }
+    attachEvent() {
+    }
 
     displayRecipes(arrayRecipes) {
-        const galleryRecipes = document.getElementsByClassName("js-galleryRecipes")[0];
-        galleryRecipes.innerHTML = "";
+        this.galleryRecipes.innerHTML = "";
         for (const item of arrayRecipes) {
             const cardRecipes = document.createElement("article");
             cardRecipes.classList.add("cardRecipes");
@@ -59,21 +41,17 @@ export default class Recipes {
                 </div>
             `;
             const wrapListIngredient = cardRecipes.getElementsByClassName("js-wrapListIngredient")[0];
-            // console.log("item: ", item);
             for (const element of item.ingredients) {
-
-                // console.log("element :", element);
                 let li = document.createElement("li");
                 li.innerHTML = ` 
-                <div>${element.ingredient} <span>${element.quantity ? ": " + element.quantity : ""} ${element.unit ? element.unit : ""}</span> </div>
+                    <div>${element.ingredient} <span>${element.quantity ? ": " + element.quantity : ""} ${element.unit ? element.unit : ""}</span> </div>
                 `;
                 wrapListIngredient.appendChild(li);
             }
 
-            galleryRecipes.appendChild(cardRecipes);
+            this.galleryRecipes.appendChild(cardRecipes);
         };
     }
-
 };
 
 {/* <article class="cardRecipes">
