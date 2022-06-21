@@ -316,7 +316,6 @@ body {
   display: none !important;
 }
 .container .search__searchTags .searchByTagButtons__button.showListTag {
-  min-width: none;
   cursor: unset;
   max-width: 650px;
   width: 100%;
