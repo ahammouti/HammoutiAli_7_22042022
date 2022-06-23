@@ -1,9 +1,9 @@
 import Recipes from "./Recipes.js";
 export default class Search {
     constructor() {
-        this.arrayAllDataRecipes = [];
-        this.arrayIngredients = [];
-        this.arrayIngredientsFiltered = [];
+        this.arrayAllDataRecipes = []; // tableau de toutes les recettes
+        this.arrayIngredients = []; // tableau des ingredients non triés
+        this.arrayIngredientsFiltered = []; // 
         this.filterIngr = [];
         this.filterIngrTags = [];
 
