@@ -99,22 +99,26 @@ export default class Search {
     _searchByInput(e) {
         this.indexOfInputValue = this.historySearch.indexOf(e.target.value);
         if (e.target.value.length > 2) {
+            // for (const tag of this.tags) {
+            //     tag.innerHTML = "";
+            // }
             if (e.target.value != this.historySearchbar) {
-                this.historySearch.splice(this.historySearch.indexOf(this.historySearchbar, 1))
                 this.historySearchbar = e.target.value;
+                this.historySearch.splice(this.historySearch.indexOf(this.historySearchbar, 1))
                 console.log(this.historySearchbar);
+                this.filterSearch(e, this.arrayAllDataRecipes);
             }
             console.log("historySearchbar: ", this.historySearchbar);
-            this.filterSearch(this.arrayAllDataRecipes);
+            this.filterSearchFilters(e, "ingredients")
             this.historySearch.push(e.target.value);
         }
 
         if (e.target.value.length < 3) {
             console.log(this.historySearchbar);
             if (e.target.value != this.historySearchbar) {
-                this.historySearch.splice(this.historySearch.indexOf(this.historySearchbar, 1));
                 this.historySearchbar = e.target.value;
-                this.filterSearch(this.arrayAllDataRecipes);
+                this.historySearch.splice(this.historySearch.indexOf(this.historySearchbar, 1));
+                this.filterSearch(e, this.arrayAllDataRecipes);
                 this.getCurrentTagValue(e)
                 this.filterSearchFilters(e, "ingredients")
                 this.filterSearchFilters(e, "utensils")
@@ -124,7 +128,7 @@ export default class Search {
         }
     }
 
-    _filterSearch(array) {
+    _filterSearch(e, array) {
         this.galleryRecipes.innerHTML = "";
         console.log("tableau de tag clické: ", this.historySearch);
 
@@ -135,14 +139,18 @@ export default class Search {
             this.galleryRecipes.appendChild(noRecipes);
         }
 
-        this.filterRecipes = array.filter(recipe => {
+        this.filterSearchFilters(e, "ingredients")
+        this.filterRecipes = [];
+
+        for (let index = 0; index < array.length; index++) {
+            const recipe = array[index];
             if (this.historySearch.map(tag => tag.toLowerCase()).every(r => recipe.name.toLowerCase().includes(r))) {
                 if (!this.filterRecipes.includes(recipe)) {
                     this.filterRecipes.push(recipe);
                     this.recipes.displayRecipes(this.filterRecipes);
                 }
                 this.displayFilter(this.filterIngr, "ingredients")
-
+                console.log(this.filterRecipes);
             }
 
             if (this.historySearch.map(tag => tag.toLowerCase()).every(r => recipe.description.toLowerCase().includes(r))) {
@@ -156,27 +164,25 @@ export default class Search {
                 if (!this.filterRecipes.includes(recipe)) {
                     this.filterRecipes.push(recipe);
                     this.recipes.displayRecipes(this.filterRecipes);
-                    console.log(this.filterRecipes);
-
-                    for (const tag of this.tags) {
-                        tag.innerHTML = "";
-                    }
                 }
-                recipe.ingredients.forEach(i => {
-                    this.arrayIngredientsFiltered.push(i.ingredient.toLowerCase());
+
+                for (const ingr of recipe.ingredients) {
+                    this.arrayIngredientsFiltered.push(ingr.ingredient.toLowerCase());
                     this.filterIngr = [...new Set(this.arrayIngredientsFiltered)];
-                    return this.filterIngr;
-                })
-                recipe.ustensils.forEach(u => {
-                    this.arrayUtensilsFiltered.push(u.toLowerCase());
+                }
+
+                for (const ust of recipe.ustensils) {
+                    this.arrayUtensilsFiltered.push(ust.toLowerCase());
                     this.filterUst = [...new Set(this.arrayUtensilsFiltered)];
-                })
+                }
+
                 this.arrayAppliancesFiltered.push(recipe.appliance.toLowerCase());
                 this.filterApp = [...new Set(this.arrayAppliancesFiltered)];
 
                 for (const tag of this.tags) {
                     tag.innerHTML = "";
                 }
+
                 this.displayFilter(this.filterIngr, "ingredients")
                 this.displayFilter(this.filterApp, "appliances")
                 this.displayFilter(this.filterUst, "utensils")
@@ -188,13 +194,14 @@ export default class Search {
                     this.recipes.displayRecipes(this.filterRecipes)
                 }
             }
+
             if (this.historySearch.map(tag => tag.toLowerCase()).every(r => recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(r))) {
                 if (!this.filterRecipes.includes(recipe)) {
                     this.filterRecipes.push(recipe);
                     this.recipes.displayRecipes(this.filterRecipes)
                 }
             }
-        })
+        }
     }
 
     deleteItemTagInFilterList() {
@@ -374,11 +381,11 @@ export default class Search {
             else this.displayTag(e, "utensils", tagClicked);
             console.log(tagClicked);
 
-            this.filterSearch(this.arrayAllDataRecipes);
             this.filterSearchFilters(e, "ingredients")
             this.filterSearchFilters(e, "appliances")
             this.filterSearchFilters(e, "utensils")
 
+            this.filterSearch(e, this.arrayAllDataRecipes);
             this.historySearch.push(tagClicked);
             this.historySearch.push(tagClicked);
             this.deleteItemTagInFilterList();
@@ -394,7 +401,7 @@ export default class Search {
         if (hideTag.nodeName == "BUTTON") {
             const newArr = this.historySearch.filter(el => el !== hideTag.getAttribute("id"));
             this.historySearch = newArr;
-            this.filterSearch(this.arrayAllDataRecipes);
+            this.filterSearch(e, this.arrayAllDataRecipes);
             this.filterSearchFilters(e, "ingredients");
             this.filterSearchFilters(e, "utensils");
             this.filterSearchFilters(e, "appliances");
