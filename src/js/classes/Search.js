@@ -99,22 +99,16 @@ export default class Search {
     _searchByInput(e) {
         this.indexOfInputValue = this.historySearch.indexOf(e.target.value);
         if (e.target.value.length > 2) {
-            // for (const tag of this.tags) {
-            //     tag.innerHTML = "";
-            // }
             if (e.target.value != this.historySearchbar) {
                 this.historySearchbar = e.target.value;
                 this.historySearch.splice(this.historySearch.indexOf(this.historySearchbar, 1))
-                console.log(this.historySearchbar);
                 this.filterSearch(e, this.arrayAllDataRecipes);
             }
-            console.log("historySearchbar: ", this.historySearchbar);
             this.filterSearchFilters(e, "ingredients")
             this.historySearch.push(e.target.value);
         }
 
         if (e.target.value.length < 3) {
-            console.log(this.historySearchbar);
             if (e.target.value != this.historySearchbar) {
                 this.historySearchbar = e.target.value;
                 this.historySearch.splice(this.historySearch.indexOf(this.historySearchbar, 1));
@@ -124,13 +118,11 @@ export default class Search {
                 this.filterSearchFilters(e, "utensils")
                 this.filterSearchFilters(e, "appliances")
             }
-            console.log("tags : ", this.historySearch);
         }
     }
 
     _filterSearch(e, array) {
         this.galleryRecipes.innerHTML = "";
-        console.log("tableau de tag clické: ", this.historySearch);
 
         if (this.filterRecipes.length < 1) {
             const noRecipes = document.createElement("div");
@@ -150,7 +142,6 @@ export default class Search {
                     this.recipes.displayRecipes(this.filterRecipes);
                 }
                 this.displayFilter(this.filterIngr, "ingredients")
-                console.log(this.filterRecipes);
             }
 
             if (this.historySearch.map(tag => tag.toLowerCase()).every(r => recipe.description.toLowerCase().includes(r))) {
@@ -230,7 +221,6 @@ export default class Search {
                 if (el.includes(searchedString)) {
                     newArray.splice(newArray.indexOf(this.historySearchbarFilters, 1));
                     newArray.push(el);
-                    console.log(newArray);
                     this.displayFilter(newArray, type);
                 }
             })
@@ -379,7 +369,6 @@ export default class Search {
                 this.displayTag(e, "appliances", tagClicked);
             }
             else this.displayTag(e, "utensils", tagClicked);
-            console.log(tagClicked);
 
             this.filterSearchFilters(e, "ingredients")
             this.filterSearchFilters(e, "appliances")
@@ -389,8 +378,6 @@ export default class Search {
             this.historySearch.push(tagClicked);
             this.historySearch.push(tagClicked);
             this.deleteItemTagInFilterList();
-            console.log("================================================= ");
-            console.log("tableau de tag clické: ", this.historySearch);
 
             return this.historySearch;
         }
