@@ -78,8 +78,6 @@ export default class Search {
 
         this.containerTags.addEventListener("click", (e) => {
             this.closingTag(e)
-            this.closingTag(e)
-            this.closingTag(e)
         });
     }
 
@@ -99,10 +97,12 @@ export default class Search {
     _searchByInput(e) {
         this.indexOfInputValue = this.historySearch.indexOf(e.target.value);
         if (e.target.value.length > 2) {
+            this.filterSearch(e, this.arrayAllDataRecipes);
             if (e.target.value != this.historySearchbar) {
+                this.historySearch.push("");
+                this.historySearch.splice(this.historySearch.indexOf(this.historySearchbar));
                 this.historySearchbar = e.target.value;
-                this.historySearch.splice(this.historySearch.indexOf(this.historySearchbar, 1))
-                this.filterSearch(e, this.arrayAllDataRecipes);
+                this.getCurrentTagValue(e);
             }
             this.filterSearchFilters(e, "ingredients")
             this.historySearch.push(e.target.value);
@@ -110,10 +110,11 @@ export default class Search {
 
         if (e.target.value.length < 3) {
             if (e.target.value != this.historySearchbar) {
+                this.historySearch.push("");
+                this.historySearch.splice(this.historySearch.indexOf(this.historySearchbar));
                 this.historySearchbar = e.target.value;
-                this.historySearch.splice(this.historySearch.indexOf(this.historySearchbar, 1));
-                this.filterSearch(e, this.arrayAllDataRecipes);
                 this.getCurrentTagValue(e)
+                this.filterSearch(e, this.arrayAllDataRecipes);
                 this.filterSearchFilters(e, "ingredients")
                 this.filterSearchFilters(e, "utensils")
                 this.filterSearchFilters(e, "appliances")
@@ -124,15 +125,14 @@ export default class Search {
     _filterSearch(e, array) {
         this.galleryRecipes.innerHTML = "";
 
+        this.filterSearchFilters(e, "ingredients")
+        this.filterRecipes = [];
         if (this.filterRecipes.length < 1) {
             const noRecipes = document.createElement("div");
             noRecipes.classList.add("noRecipes");
             noRecipes.textContent = "Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.";
             this.galleryRecipes.appendChild(noRecipes);
         }
-
-        this.filterSearchFilters(e, "ingredients")
-        this.filterRecipes = [];
 
         for (let index = 0; index < array.length; index++) {
             const recipe = array[index];
