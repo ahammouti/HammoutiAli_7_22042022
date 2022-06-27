@@ -54,7 +54,7 @@ export default class Search {
         this.filterSearchFilters = this.debounced((e, type) => this._filterSearchFilters(e, type));
         this.getCurrentTagValue = (e) => this._getCurrentTagValue(e);
         this.searchByInput = this.debounced((e) => this._searchByInput(e), 1000);
-        this.closingTag = (e, type) => this._closingTag(e, type);
+        this.closingTag = (e) => this._closingTag(e);
     }
 
     debounced = (func, delay) => {
@@ -78,8 +78,6 @@ export default class Search {
 
         this.containerTags.addEventListener("click", (e) => {
             this.closingTag(e)
-            this.closingTag(e)
-            this.closingTag(e)
         });
     }
 
@@ -102,15 +100,12 @@ export default class Search {
             if (e.target.value != this.historySearchbar) {
                 this.historySearch.splice(this.historySearch.indexOf(this.historySearchbar, 1))
                 this.historySearchbar = e.target.value;
-                console.log(this.historySearchbar);
             }
-            console.log("historySearchbar: ", this.historySearchbar);
             this.filterSearch(this.arrayAllDataRecipes);
             this.historySearch.push(e.target.value);
         }
 
         if (e.target.value.length < 3) {
-            console.log(this.historySearchbar);
             if (e.target.value != this.historySearchbar) {
                 this.historySearch.splice(this.historySearch.indexOf(this.historySearchbar, 1));
                 this.historySearchbar = e.target.value;
@@ -120,13 +115,11 @@ export default class Search {
                 this.filterSearchFilters(e, "utensils")
                 this.filterSearchFilters(e, "appliances")
             }
-            console.log("tags : ", this.historySearch);
         }
     }
 
     _filterSearch(array) {
         this.galleryRecipes.innerHTML = "";
-        console.log("tableau de tag clické: ", this.historySearch);
 
         if (this.filterRecipes.length < 1) {
             const noRecipes = document.createElement("div");
@@ -141,8 +134,7 @@ export default class Search {
                     this.filterRecipes.push(recipe);
                     this.recipes.displayRecipes(this.filterRecipes);
                 }
-                this.displayFilter(this.filterIngr, "ingredients")
-
+                this.displayFilter(this.filterIngr, "ingredients");
             }
 
             if (this.historySearch.map(tag => tag.toLowerCase()).every(r => recipe.description.toLowerCase().includes(r))) {
@@ -156,7 +148,6 @@ export default class Search {
                 if (!this.filterRecipes.includes(recipe)) {
                     this.filterRecipes.push(recipe);
                     this.recipes.displayRecipes(this.filterRecipes);
-                    console.log(this.filterRecipes);
 
                     for (const tag of this.tags) {
                         tag.innerHTML = "";
@@ -177,21 +168,22 @@ export default class Search {
                 for (const tag of this.tags) {
                     tag.innerHTML = "";
                 }
-                this.displayFilter(this.filterIngr, "ingredients")
-                this.displayFilter(this.filterApp, "appliances")
-                this.displayFilter(this.filterUst, "utensils")
+                this.displayFilter(this.filterIngr, "ingredients");
+                this.displayFilter(this.filterApp, "appliances");
+                this.displayFilter(this.filterUst, "utensils");
             }
 
             if (this.historySearch.map(tag => tag.toLowerCase()).every(r => recipe.appliance.toLowerCase().includes(r))) {
                 if (!this.filterRecipes.includes(recipe)) {
                     this.filterRecipes.push(recipe);
-                    this.recipes.displayRecipes(this.filterRecipes)
+                    this.recipes.displayRecipes(this.filterRecipes);
                 }
             }
+
             if (this.historySearch.map(tag => tag.toLowerCase()).every(r => recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(r))) {
                 if (!this.filterRecipes.includes(recipe)) {
                     this.filterRecipes.push(recipe);
-                    this.recipes.displayRecipes(this.filterRecipes)
+                    this.recipes.displayRecipes(this.filterRecipes);
                 }
             }
         })
@@ -223,7 +215,6 @@ export default class Search {
                 if (el.includes(searchedString)) {
                     newArray.splice(newArray.indexOf(this.historySearchbarFilters, 1));
                     newArray.push(el);
-                    console.log(newArray);
                     this.displayFilter(newArray, type);
                 }
             })
@@ -372,18 +363,15 @@ export default class Search {
                 this.displayTag(e, "appliances", tagClicked);
             }
             else this.displayTag(e, "utensils", tagClicked);
-            console.log(tagClicked);
 
             this.filterSearch(this.arrayAllDataRecipes);
-            this.filterSearchFilters(e, "ingredients")
-            this.filterSearchFilters(e, "appliances")
-            this.filterSearchFilters(e, "utensils")
+            this.filterSearchFilters(e, "ingredients");
+            this.filterSearchFilters(e, "appliances");
+            this.filterSearchFilters(e, "utensils");
 
             this.historySearch.push(tagClicked);
             this.historySearch.push(tagClicked);
             this.deleteItemTagInFilterList();
-            console.log("================================================= ");
-            console.log("tableau de tag clické: ", this.historySearch);
 
             return this.historySearch;
         }
