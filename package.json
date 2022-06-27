@@ -1,5 +1,6 @@
 {
   "name": "les-petits-plats",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,5 +13,8 @@
   "license": "ISC",
   "devDependencies": {
     "node-sass": "^7.0.1"
+  },
+  "dependencies": {
+    "sass": "^1.51.0"
   }
 }

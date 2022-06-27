@@ -1,0 +1,139 @@
+.container {
+    .galleryRecipes {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 50px;
+        padding-bottom: $space-between-section + $space-between-section;
+
+        .noRecipes {
+            background: #e7e7e7;
+            border-radius: 5px;
+            padding: 20px;
+            width: 83vw;
+            display: flex;
+            margin-top: 50px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cardRecipes {
+            border-radius: 5px;
+            min-height: 364px;
+            width: 100%;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+
+            &__imgRecipe {
+                border-radius: 5px 5px 0 0;
+                background: #C7BEBE;
+                flex: 1;
+            }
+
+            &__overlayRecipe {
+                border-radius: 0 0 5px 5px;
+                flex: 1.1;
+                background: #E7E7E7;
+                padding: 15px;
+
+                .heading {
+                    display: flex;
+                    padding-bottom: $space-between-section;
+
+                    &__title {
+                        flex: 2;
+                        margin-right: 30px;
+                    }
+
+                    &__timer {
+                        display: flex;
+                        align-items: center;
+                        flex: 0.7;
+                        min-width: 100px;
+
+                        small {
+                            font-weight: bold;
+                            font-size: 18px;
+                            margin-left: 10px;
+                        }
+                    }
+                }
+
+                .ingredientsAndDescription {
+                    display: flex;
+                    max-height: 100px;
+
+                    &__ingr {
+                        transition: all 1s ease-in-out;
+                        flex: 1;
+                        font-size: 12.5px;
+                        font-weight: bold;
+                        overflow-y: hidden;
+
+                        @include ellipsis;
+
+                        span {
+                            font-weight: normal;
+                        }
+
+                        &:hover {
+                            overflow-y: auto;
+                            @include ellipsis-none;
+                        }
+                    }
+
+                    &__desc {
+                        margin-left: 10px;
+                        font-size: 12.5px;
+                        line-height: 14px;
+                        flex: 1;
+
+                        overflow-y: hidden;
+
+                        p {
+                            @include ellipsis;
+                        }
+
+                        &:hover {
+                            .cardRecipes__overlayRecipe {
+                                animation: ellipsis 1s infinite ease-in-out;
+                            }
+
+                            max-height: 150px;
+                            overflow-y: auto;
+
+                            p {
+                                @include ellipsis-none;
+                                overflow-x: hidden;
+                            }
+
+
+                        }
+
+                        @keyframes ellipsis {
+                            from {}
+
+                            to {}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .container {
+        .galleryRecipes {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+@media screen and (min-width: 1072px) {
+    .container {
+        .galleryRecipes {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}

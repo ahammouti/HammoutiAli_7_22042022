@@ -1,7 +1,9 @@
+import Recipes from "./classes/Recipes.js";
 import Search from "./classes/Search.js";
-
-function init() {
-    new Search();
+export default class App {
+    constructor() {
+        this.search = new Search();
+    }
 }
 
-init();
+export const init = new App();
