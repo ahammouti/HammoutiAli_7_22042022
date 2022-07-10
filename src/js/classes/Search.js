@@ -89,7 +89,7 @@ export default class Search {
             this.getIngredients(this.arrayAllDataRecipes);
             this.getAppliances();
             this.getUtensils();
-            this.recipes = new Recipes();
+            this.recipes = new Recipes(); // Instance de la classe Recipes
             this.recipes.displayRecipes(this.arrayAllDataRecipes)
         }
     }
