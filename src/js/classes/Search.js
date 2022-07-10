@@ -3,31 +3,31 @@ export default class Search {
     constructor() {
         this.arrayAllDataRecipes = []; // tableau de toutes les recettes
         this.arrayIngredients = []; // tableau des ingredients non triés
-        this.arrayIngredientsFiltered = []; // 
-        this.filterIngr = [];
+        this.arrayIngredientsFiltered = []; // tableau des ingrédients triés 
+        this.filterIngr = []; // copie du tableau des ingrédients triés
         this.filterIngrTags = [];
 
-        this.arrayAppliances = [];
-        this.arrayAppliancesFiltered = [];
-        this.filterApp = [];
+        this.arrayAppliances = []; // tableau des Appareils non triés
+        this.arrayAppliancesFiltered = []; // tableau des Appareils triés
+        this.filterApp = []; // copie du tableau des Appareils triés
         this.filterAppTags = [];
 
-        this.arrayUtensils = [];
-        this.arrayUtensilsFiltered = [];
-        this.filterUst = [];
+        this.arrayUtensils = []; // tableau des Ustensils non triés
+        this.arrayUtensilsFiltered = []; // tableau des Ustensils triés
+        this.filterUst = []; // copie du tableau des Ustensils triés
         this.filterUstTags = [];
 
-        this.filterItem = [];
-        this.historySearch = [];
-        this.filterRecipes = [];
-        this.historySearchbar = "";
+        this.filterItem = []; // item dans les boutons de filtres
+        this.historySearch = []; // tableau d'historique des recherches pour filtrer les resultats en fonction des éléments du tableau
+        this.filterRecipes = []; // tableau des recettes filtrées
+        this.historySearchbar = ""; // propriété qui sert a enregistrer le dernier mot tapé dans la searchbar
         this.historySearchbarFilters = "";
 
         this.searchInput = document.getElementsByClassName("js-inputSearchbar")[0];
         this.searchInputIngredient = document.getElementsByClassName("inputSearch-ingredients")[0];
         this.searchInputAppliances = document.getElementsByClassName("inputSearch-appliances")[0];
         this.searchInputUtensils = document.getElementsByClassName("inputSearch-utensils")[0];
-        this.galleryRecipes = document.getElementsByClassName("js-galleryRecipes")[0];
+        this.galleryRecipes = document.getElementsByClassName("js-galleryRecipes")[0]; // container des recettes
 
         this.containerTags = document.getElementsByClassName("js-tags")[0];
         this.tags = document.getElementsByClassName("listTagBtn");
@@ -174,6 +174,7 @@ export default class Search {
                     tag.innerHTML = "";
                 }
 
+                // affichage des filtres
                 this.displayFilter(this.filterIngr, "ingredients")
                 this.displayFilter(this.filterApp, "appliances")
                 this.displayFilter(this.filterUst, "utensils")
