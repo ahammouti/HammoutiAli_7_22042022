@@ -39,6 +39,6 @@ export default class Recipes {
             }
 
             this.galleryRecipes.appendChild(cardRecipes);
-        };
+        }
     }
-};
+}

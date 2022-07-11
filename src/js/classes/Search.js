@@ -63,21 +63,21 @@ export default class Search {
         return (...args) => {
             clearTimeout(timer);
             timer = setTimeout(() => { func.apply(this, args); }, delay);
-        }
-    }
+        };
+    };
 
     async attachEvent() {
-        for (const btn of this.searchByTagBtnDiv) { this.searchByTagBtnDiv ? btn.addEventListener("click", this.openFilterList) : "" }
+        for (const btn of this.searchByTagBtnDiv) { this.searchByTagBtnDiv ? btn.addEventListener("click", this.openFilterList) : ""; }
 
-        this.searchInputIngredient.addEventListener("input", (e) => { this.filterSearchFilters(e, "ingredients") })
-        this.searchInputAppliances.addEventListener("input", (e) => { this.filterSearchFilters(e, "appliances") })
-        this.searchInputUtensils.addEventListener("input", (e) => { this.filterSearchFilters(e, "utensils") });
+        this.searchInputIngredient.addEventListener("input", (e) => { this.filterSearchFilters(e, "ingredients"); });
+        this.searchInputAppliances.addEventListener("input", (e) => { this.filterSearchFilters(e, "appliances"); });
+        this.searchInputUtensils.addEventListener("input", (e) => { this.filterSearchFilters(e, "utensils"); });
 
-        for (const tag of this.tags) { tag.addEventListener("click", this.getCurrentTagValue) }
+        for (const tag of this.tags) { tag.addEventListener("click", this.getCurrentTagValue); }
         this.searchInput.addEventListener("input", this.searchByInput);
 
         this.containerTags.addEventListener("click", (e) => {
-            this.closingTag(e)
+            this.closingTag(e);
         });
     }
 
@@ -90,7 +90,7 @@ export default class Search {
             this.getAppliances();
             this.getUtensils();
             this.recipes = new Recipes(); // Instance de la classe Recipes
-            this.recipes.displayRecipes(this.arrayAllDataRecipes)
+            this.recipes.displayRecipes(this.arrayAllDataRecipes);
         }
     }
 
@@ -104,7 +104,7 @@ export default class Search {
                 this.historySearchbar = e.target.value;
                 this.getCurrentTagValue(e);
             }
-            this.filterSearchFilters(e, "ingredients")
+            this.filterSearchFilters(e, "ingredients");
             this.historySearch.push(e.target.value);
         }
 
@@ -113,11 +113,11 @@ export default class Search {
                 this.historySearch.push("");
                 this.historySearch.splice(this.historySearch.indexOf(this.historySearchbar));
                 this.historySearchbar = e.target.value;
-                this.getCurrentTagValue(e)
+                this.getCurrentTagValue(e);
                 this.filterSearch(e, this.arrayAllDataRecipes);
-                this.filterSearchFilters(e, "ingredients")
-                this.filterSearchFilters(e, "utensils")
-                this.filterSearchFilters(e, "appliances")
+                this.filterSearchFilters(e, "ingredients");
+                this.filterSearchFilters(e, "utensils");
+                this.filterSearchFilters(e, "appliances");
             }
         }
     }
@@ -125,7 +125,7 @@ export default class Search {
     _filterSearch(e, array) {
         this.galleryRecipes.innerHTML = "";
 
-        this.filterSearchFilters(e, "ingredients")
+        this.filterSearchFilters(e, "ingredients");
         this.filterRecipes = [];
         if (this.filterRecipes.length < 1) {
             const noRecipes = document.createElement("div");
@@ -141,7 +141,7 @@ export default class Search {
                     this.filterRecipes.push(recipe);
                     this.recipes.displayRecipes(this.filterRecipes);
                 }
-                this.displayFilter(this.filterIngr, "ingredients")
+                this.displayFilter(this.filterIngr, "ingredients");
             }
 
             if (this.historySearch.map(tag => tag.toLowerCase()).every(r => recipe.description.toLowerCase().includes(r))) {
@@ -175,22 +175,22 @@ export default class Search {
                 }
 
                 // affichage des filtres
-                this.displayFilter(this.filterIngr, "ingredients")
-                this.displayFilter(this.filterApp, "appliances")
-                this.displayFilter(this.filterUst, "utensils")
+                this.displayFilter(this.filterIngr, "ingredients");
+                this.displayFilter(this.filterApp, "appliances");
+                this.displayFilter(this.filterUst, "utensils");
             }
 
             if (this.historySearch.map(tag => tag.toLowerCase()).every(r => recipe.appliance.toLowerCase().includes(r))) {
                 if (!this.filterRecipes.includes(recipe)) {
                     this.filterRecipes.push(recipe);
-                    this.recipes.displayRecipes(this.filterRecipes)
+                    this.recipes.displayRecipes(this.filterRecipes);
                 }
             }
 
             if (this.historySearch.map(tag => tag.toLowerCase()).every(r => recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(r))) {
                 if (!this.filterRecipes.includes(recipe)) {
                     this.filterRecipes.push(recipe);
-                    this.recipes.displayRecipes(this.filterRecipes)
+                    this.recipes.displayRecipes(this.filterRecipes);
                 }
             }
         }
@@ -224,7 +224,7 @@ export default class Search {
                     newArray.push(el);
                     this.displayFilter(newArray, type);
                 }
-            })
+            });
             this.deleteItemTagInFilterList();
             newArray.splice(newArray.indexOf(this.historySearchbarFilters, 1));
         }
@@ -322,7 +322,7 @@ export default class Search {
             this.filterItem.textContent = element;
             this.containerFilter.appendChild(this.filterItem);
         });
-    };
+    }
 
     _openFilterList(e) {
         const divBtnList = document.getElementsByClassName("js-btnFilter");
@@ -371,9 +371,9 @@ export default class Search {
             }
             else this.displayTag(e, "utensils", tagClicked);
 
-            this.filterSearchFilters(e, "ingredients")
-            this.filterSearchFilters(e, "appliances")
-            this.filterSearchFilters(e, "utensils")
+            this.filterSearchFilters(e, "ingredients");
+            this.filterSearchFilters(e, "appliances");
+            this.filterSearchFilters(e, "utensils");
 
             this.filterSearch(e, this.arrayAllDataRecipes);
             this.historySearch.push(tagClicked);
